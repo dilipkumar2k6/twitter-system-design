@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-11-09T14:42:49.483Z" agent="5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36" etag="0fp5BG2lcdTk-xARsRn8" version="13.9.2" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-10T05:18:28.245Z" agent="5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36" etag="BCN80O70p1-tpD1dY01b" version="13.9.2" type="github">
   <diagram id="GRMSIZcS6dBet5IUKyX5" name="Page-1">
     <mxGraphModel dx="786" dy="439" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -11,7 +11,7 @@
           <mxGeometry width="140" height="300" as="geometry" />
         </mxCell>
         <mxCell id="j6bsub0oAUbZr3Ido0uE-1" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="j6bsub0oAUbZr3Ido0uE-6">
-          <mxGeometry x="10" y="10" width="120" height="60" as="geometry" />
+          <mxGeometry x="10" y="10" width="100" height="50" as="geometry" />
         </mxCell>
         <mxCell id="j6bsub0oAUbZr3Ido0uE-2" value="users" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="j6bsub0oAUbZr3Ido0uE-6">
           <mxGeometry x="40" y="200" width="60" height="80" as="geometry" />
@@ -26,7 +26,7 @@
           <mxGeometry width="140" height="300" as="geometry" />
         </mxCell>
         <mxCell id="j6bsub0oAUbZr3Ido0uE-9" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="j6bsub0oAUbZr3Ido0uE-7">
-          <mxGeometry x="10" y="10" width="120" height="60" as="geometry" />
+          <mxGeometry x="10" y="10" width="90" height="50" as="geometry" />
         </mxCell>
         <mxCell id="j6bsub0oAUbZr3Ido0uE-10" value="tweets" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="j6bsub0oAUbZr3Ido0uE-7">
           <mxGeometry x="40" y="200" width="60" height="80" as="geometry" />
@@ -41,7 +41,7 @@
           <mxGeometry width="140" height="300" as="geometry" />
         </mxCell>
         <mxCell id="j6bsub0oAUbZr3Ido0uE-14" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="j6bsub0oAUbZr3Ido0uE-12">
-          <mxGeometry x="10" y="10" width="120" height="60" as="geometry" />
+          <mxGeometry x="10" y="10" width="90" height="40" as="geometry" />
         </mxCell>
         <mxCell id="j6bsub0oAUbZr3Ido0uE-15" value="user-followers" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="j6bsub0oAUbZr3Ido0uE-12">
           <mxGeometry x="40" y="200" width="60" height="80" as="geometry" />
@@ -56,7 +56,7 @@
           <mxGeometry width="140" height="300" as="geometry" />
         </mxCell>
         <mxCell id="j6bsub0oAUbZr3Ido0uE-19" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="j6bsub0oAUbZr3Ido0uE-17">
-          <mxGeometry x="10" y="10" width="120" height="60" as="geometry" />
+          <mxGeometry x="10" y="10" width="90" height="40" as="geometry" />
         </mxCell>
         <mxCell id="j6bsub0oAUbZr3Ido0uE-20" value="favorite-tweets" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="j6bsub0oAUbZr3Ido0uE-17">
           <mxGeometry x="40" y="200" width="60" height="80" as="geometry" />
@@ -71,10 +71,70 @@
           <mxGeometry width="140" height="300" as="geometry" />
         </mxCell>
         <mxCell id="j6bsub0oAUbZr3Ido0uE-24" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="j6bsub0oAUbZr3Ido0uE-22">
-          <mxGeometry x="10" y="10" width="120" height="60" as="geometry" />
+          <mxGeometry x="10" y="10" width="90" height="40" as="geometry" />
         </mxCell>
         <mxCell id="j6bsub0oAUbZr3Ido0uE-26" value="Timeline Service" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="j6bsub0oAUbZr3Ido0uE-22">
           <mxGeometry x="1" y="310" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-56" value="Cache Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="j6bsub0oAUbZr3Ido0uE-22">
+          <mxGeometry x="10" y="120" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-28" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="50" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-29" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="60" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-31" value="users" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="70" y="240" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-32" value="users" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="80" y="250" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-33" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="50" width="90" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-34" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="60" width="90" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-35" value="tweets" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="240" y="240" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-36" value="tweets" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="250" y="250" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-37" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="50" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-38" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="60" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-39" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="50" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-40" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="60" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-51" value="favorite-tweets" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="570" y="240" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-52" value="favorite-tweets" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="580" y="250" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-53" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="690" y="50" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-54" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="60" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-55" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="210" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-57" value="Cache Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="690" y="160" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="j6bsub0oAUbZr3Ido0uE-58" value="Cache Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="170" width="80" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
