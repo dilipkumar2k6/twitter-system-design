@@ -190,4 +190,77 @@ Following are proposed storage system
 - Rank these tweets based on relevance to user. This represent user's current feed
 - Store this feed in the cache and return top posts (say 20) to be rendered on user's timeline
 - Frontend can make paginated api call to fetch next `20` tweets
+Q. How to update new incoming posts from people user follow?
+A: 
+- If user is online, we should have mechanism to rank and add the newer posts to her feed. 
+- We can periodically (say every 5 minutes) perform the above steps to rank and add the newer posts to user's feed.
+- User can be notified about new feed
+
+## Feed publishing
+- Whenever user loads her newsfeed page, she has to request and pull feed items from the server. 
+- When she reaches the end of her current feed, she can pull more data from the server. 
+- For newer items either the server can notify user and then she can pull, or the server can push, these new posts. 
+## Problem with run time feed generation
+- Crazy slow for users with a lot of follows as we have to perform sorting/merging/ranking of a huge number of posts.
+- We generate the timeline when a user loads their page. This would be quite slow and have a high latency.
+- For live updates, each status update will result in feed updates for all followers. This could result in high backlogs in our Newsfeed Generation Service.
+- For live updates, the server pushing (or notifying about) newer posts to users could lead to very heavy loads, especially for people or pages that have a lot of followers. 
+## Offline generation for newsfeed
+### Steps to generate offline news feed
+- We can have dedicated servers that are continuously generating users’ newsfeed and storing them in memory. 
+- So, whenever a user requests for the new posts for their feed, we can simply serve it from the pre-generated, stored location. 
+- Using this scheme, user’s newsfeed is not compiled on load, but rather on a regular basis and returned to users whenever they request for it.
+- Whenever these servers need to generate the feed for a user, they will first query to see what was the last time the feed was generated for that user. 
+- Then, new feed data would be generated from that time onwards. 
+- We can store this data in a hash table where the “key” would be UserID and “value” would be a STRUCT like this:
+```
+Struct {
+    LinkedHashMap<FeedItemID, FeedItem> feedItems;
+    DateTime lastGenerated;
+}
+```
+- We can store FeedItemIDs in a data structure similar to `Linked HashMap` or `TreeMap`, which can allow us to not only jump to any feed item but also iterate through the map easily. 
+- Whenever users want to fetch more feed items, they can send the last FeedItemID they currently see in their newsfeed, we can then jump to that FeedItemID in our hash-map and return next batch/page of feed items from there.
+### How many feed items should we store in memory for a user’s feed?
+- Initially, we can decide to store 500 feed items per user, but this number can be adjusted later based on the usage pattern. 
+- For example, if we assume that one page of a user’s feed has 20 posts and most of the users never browse more than ten pages of their feed, we can decide to store only 200 posts per user. 
+- For any user who wants to see more posts (more than what is stored in memory), we can always query backend servers.
+### Should we generate (and keep in memory) newsfeeds for all users?
+- There will be a lot of users that don’t log-in frequently. 
+- Here are a few things we can do to handle this; 
+    - a more straightforward approach could be, to use an LRU based cache that can remove users from memory that haven’t accessed their newsfeed for a long time 
+    - a smarter solution can figure out the login pattern of users to pre-generate their newsfeed, e.g., at what time of the day a user is active and which days of the week does a user access their newsfeed? etc.
+## Optimized feed publishing
+### "Pull" model or Fan-out-on-load:
+- This method involves keeping all the recent feed data in memory so that users can pull it from the server whenever they need it. 
+- Clients can pull the feed data on a regular basis or manually whenever they need it. 
+- Possible problems with this approach are 
+    - New data might not be shown to the users until they issue a pull request
+    - It’s hard to find the right pull cadence, as most of the time pull requests will result in an empty response if there is no new data, causing waste of resources.
+### "Push" model or Fan-out-on-write:
+- For a push system, once a user has published a post, we can immediately push this post to all the followers. 
+- The advantage is that when fetching feed you don’t need to go through your friend’s list and get feeds for each of them. 
+- It significantly reduces read operations. 
+- To efficiently handle this, users have to maintain a Long Poll request with the server for receiving the updates. 
+- A possible problem with this approach is that when a user has millions of followers (a celebrity-user) the server has to push updates to a lot of people.
+### Hybrid
+- An alternate method to handle feed data could be to use a hybrid approach, i.e., to do a combination of fan-out-on-write and fan-out-on-load. 
+- Specifically, we can stop pushing posts from users with a high number of followers (a celebrity user) and only push data for those users who have a few hundred (or thousand) followers. 
+- For celebrity users, we can let the followers pull the updates. 
+- Since the push operation can be extremely costly for users who have a lot of friends or followers, by disabling fanout for them, we can save a huge number of resources. 
+- Another alternate approach could be that, once a user publishes a post, we can limit the fanout to only her online friends. 
+- Also, to get benefits from both the approaches, a combination of ‘push to notify’ and ‘pull for serving’ end-users is a great way to go. Purely a push or pull model is less versatile.
+
+## Feed ranking
+- The most straightforward way to rank posts in a newsfeed is by the creation time of the posts, but today’s ranking algorithms are doing a lot more than that to ensure “important” posts are ranked higher. 
+- The high-level idea of ranking is first to select key “signals” that make a post important and then to find out how to combine them to calculate a final ranking score.
+- More specifically, we can select features that are relevant to the importance of any feed item, e.g., number of likes, comments, shares, time of the update, whether the post has images/videos, etc., and then, a score can be calculated using these features. 
+- This is generally enough for a simple ranking system. 
+- A better ranking system can significantly improve itself by constantly evaluating if we are making progress in user stickiness, retention, ads revenue, etc.
+
+
+
+
+
+
 
