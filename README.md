@@ -31,7 +31,8 @@ Following are proposed micro services
 - User follower service to follow other users
 - tweet favorite service to mark favorite tweet
 - user's timeline service
-![](Twitter-System-Design.drawio)
+![](Twitter-System-Design.png)
+
 # API Design
 ## Create user
 ```
