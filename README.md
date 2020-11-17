@@ -49,11 +49,21 @@ Following will be schema to store user details
     userId: integer
     name: string
     email: string
+    password: string
     dob: datetime  
     createdAt: datetime
     updatedAt: datetime
     lastLogin: datetime  
 }
+```
+## Upload media
+```
+POST /media?api_key=string&authToken multipart
+filename
+contentType
+
+Response: 
+htpps://media.twitter.com/xxxxxxx
 ```
 ## Create tweet
 ```
@@ -124,26 +134,26 @@ Following are proposed storage system
 ### Schema
 ```
 {
-    userId: integer (4 bytes)
-    name: string (32 bytes)
-    email: string (32 bytes)
+    userId: long (4 bytes)
+    name: string (32 bytes) (16 chars)
+    email: string (32 bytes) (16 chars)
+    password: string (32 bytes) (16 chars)
     dob: datetime  (8 bytes)
     createdAt: datetime (8 bytes)
     updatedAt: datetime (8 bytes)
     lastLogin: datetime  (8 bytes)
 }
 ```    
-- Size of each document:  100 bytes 
-    - NoSQL stores each key and data types as well
-    - Index also use disk storage
-    - Keep size as 1kb to estimate on higher side
+- Size of each document:  124 bytes 
+    - NoSQL stores each key and data types as well: 8 * 20 bytes ~ 160 bytes
+    - Index also use disk storage: userId: 8 bytes
+    - Size for one document: 124 + 160 + 8 ~ 292 bytes ~ 300 bytes
 - Total users: 1 billion
-    - Total size: 1 billion * 1kb ~= 1Tb
-    - In 5 years: 5TB
+    - Total size: 1 billion * 300 bytes ~= 300Gb
 ### Data Sharding
 - Shard key: userId
 - Limits per shard: 1TB
-- Total shards: 5
+- Total shards: 1
 - Keep 3 replicas in each shards to handle failover
 - Do write on majority i.e. compromise on consistencies and use eventual consistencies. 
 - I.e in CAP, use AP system 
@@ -151,6 +161,7 @@ Following are proposed storage system
 ### Schema
 ```
 {
+    tweetId: int (4 bytes)
     tweetData: string (140 chars ~ 280 bytes)
     tweetLat: int (4 bytes)
     tweetLong: int (4 bytes)
@@ -158,17 +169,17 @@ Following are proposed storage system
     userLong: int (4 bytes)
 }
 ```
-- Size of each document:  296 bytes 
-    - NoSQL stores each key and data types as well
-    - Index also use disk storage
-    - Keep size as 1kb to estimate on higher side
+- Size of each document:  300 bytes 
+    - NoSQL stores each key and data types as well: 6 * 20 bytes ~ 120 bytes
+    - Index also use disk storage: tweetId 4 bytes
+    - Size of one document: 300 + 120 + 4 bytes ~ 424 bytes ~ 500 bytes
 - Total users: 1 billion
 - Daily active users: 200 million
 - On avg every users makes `1` tweet in two days
 - Daily new tweets: 100 million
-    - Daily tweets size: 100 million * 1kb ~ 100GB
-    - Tweets size in 1 year: 36.50TB
-    - Tweets size in 5 years: 182TB
+    - Daily tweets size: 100 million * 500 bytes ~ 50GB
+    - Tweets size in 1 year: 18.25TB
+    - Tweets size in 5 years: 91TB
 - Media storage
     - 1 out of every 5 tweets will have image
     - 1 out of 10th tweets will have video
@@ -178,20 +189,21 @@ Following are proposed storage system
     - Total image size in 5 years: 120TB
 ### Data Sharding
 - Shard key: tweetId
-- Limits per shard: 1TB
-- Total shards: 5
+- Limits per shard: 2TB
+- Total shards: 91/2 TB ~ 46
 - Keep 3 replicas in each shards to handle failover
+- Total storage: 273Tb
 - Do write on majority i.e. compromise on consistencies and use eventual consistencies. 
 - I.e in CAP, use AP system 
 # User timeline service
-## Feed generation
+## Run time feed generation
 - retrieve  all userids given user follows
 - Retrieve latest, most popular, and relevant tweets for followed userids. These are potential tweets can be shown to user
 - Rank these tweets based on relevance to user. This represent user's current feed
 - Store this feed in the cache and return top posts (say 20) to be rendered on user's timeline
 - Frontend can make paginated api call to fetch next `20` tweets
-Q. How to update new incoming posts from people user follow?
-A: 
+
+Q. How to update new incoming posts from people user follow? 
 - If user is online, we should have mechanism to rank and add the newer posts to her feed. 
 - We can periodically (say every 5 minutes) perform the above steps to rank and add the newer posts to user's feed.
 - User can be notified about new feed
