@@ -1,5 +1,7 @@
 # Requirements and Goal of the system
 We will be designing simple version of Twitter with following requirement details.
+## Write code
+https://leetcode.com/problems/design-twitter/
 ## Functional requirements
 - User should be able to post new tweet
 - A user should be able to follow other user
